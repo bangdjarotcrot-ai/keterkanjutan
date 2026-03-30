@@ -20,7 +20,6 @@ const MapView = dynamic(() => import('@/components/organisms/map-view').then((m)
 })
 import { useToast } from '@/hooks/use-toast'
 import { useDebounce } from '@/hooks/use-debounce'
-import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'
 import type { Contact } from '@/components/molecules/export-button'
 import { useKeywordSuffix } from '@/components/molecules/keyword-settings'
 
@@ -113,13 +112,6 @@ export default function Home() {
       setIsLoadingMore(false)
     }
   }, [isLoadingMore, hasMore, nextCursor, debouncedSearch])
-
-  // Infinite scroll observer
-  const { sentinelRef } = useInfiniteScroll({
-    onLoadMore: loadMore,
-    hasMore,
-    isLoading: isLoadingMore,
-  })
 
   // Initial load
   useEffect(() => {
@@ -375,7 +367,6 @@ export default function Home() {
             onSearchChange={handleSearchChange}
             keywordSuffix={keywordSuffix}
             onKeywordSuffixChange={setKeywordSuffix}
-            sentinelRef={sentinelRef}
           />
         </section>
 

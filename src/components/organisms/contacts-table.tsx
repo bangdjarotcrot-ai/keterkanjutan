@@ -40,7 +40,6 @@ interface ContactsTableProps {
   onSearchChange: (value: string) => void
   keywordSuffix: string
   onKeywordSuffixChange: (value: string) => void
-  sentinelRef: RefObject<HTMLDivElement | null>
 }
 
 export function ContactsTable({
@@ -62,7 +61,6 @@ export function ContactsTable({
   onSearchChange,
   keywordSuffix,
   onKeywordSuffixChange,
-  sentinelRef,
 }: ContactsTableProps) {
   const allSelected =
     contacts.length > 0 &&
@@ -278,24 +276,27 @@ export function ContactsTable({
                     />
                   ))}
 
-                  {/* Infinite scroll sentinel + loading more */}
+                  {/* Load more button */}
                   {hasMore && (
                     <tr>
                       <td colSpan={10}>
-                        <div
-                          ref={sentinelRef}
-                          className="flex items-center justify-center py-4"
-                        >
-                          {isLoadingMore ? (
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              Loading more...
-                            </div>
-                          ) : (
-                            <span className="text-xs text-muted-foreground">
-                              Scroll down to load more
-                            </span>
-                          )}
+                        <div className="flex items-center justify-center py-4">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={onLoadMore}
+                            disabled={isLoadingMore}
+                            className="gap-2"
+                          >
+                            {isLoadingMore ? (
+                              <>
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                                Loading more...
+                              </>
+                            ) : (
+                              'Load More'
+                            )}
+                          </Button>
                         </div>
                       </td>
                     </tr>
