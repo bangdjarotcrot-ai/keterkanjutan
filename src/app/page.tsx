@@ -369,6 +369,15 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8 max-w-7xl">
+        {/* Map Section */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <MapPinned className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-semibold">Contact Map</h2>
+          </div>
+          <MapView />
+        </section>
+
         {/* Contacts Table Section */}
         <section>
           <div className="flex items-center gap-2 mb-4">
@@ -397,15 +406,6 @@ export default function Home() {
             keywordSuffix={keywordSuffix}
             onKeywordSuffixChange={setKeywordSuffix}
           />
-        </section>
-
-        {/* Map Section */}
-        <section>
-          <div className="flex items-center gap-2 mb-4">
-            <MapPinned className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-lg font-semibold">Contact Map</h2>
-          </div>
-          <MapView />
         </section>
 
         {/* Upload Section — Toggleable */}
