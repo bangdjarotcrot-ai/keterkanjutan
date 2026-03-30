@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Contact as ContactIcon, Smartphone, ChevronDown, ImagePlus, LayoutList, MapPinned } from 'lucide-react'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Contact as ContactIcon, Smartphone, ChevronDown, ImagePlus, MapPinned } from 'lucide-react'
 import { UploadSection, type ExtractionProgress } from '@/components/organisms/upload-section'
 import { ContactsTable } from '@/components/organisms/contacts-table'
 import dynamic from 'next/dynamic'
@@ -34,7 +33,6 @@ export default function Home() {
   const [isExtracting, setIsExtracting] = useState(false)
   const [extractionProgress, setExtractionProgress] = useState<ExtractionProgress | null>(null)
   const [isUploadVisible, setIsUploadVisible] = useState(false)
-  const [activeView, setActiveView] = useState<'table' | 'map'>('table')
 
   // Contacts state (infinite scroll)
   const [contacts, setContacts] = useState<Contact[]>([])
@@ -347,52 +345,42 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8 max-w-7xl">
-        {/* Contacts Section */}
+        {/* Map Section */}
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <ContactIcon className="h-5 w-5 text-muted-foreground" />
-              <h2 className="text-lg font-semibold">Saved Contacts</h2>
-            </div>
-            <Tabs value={activeView} onValueChange={(v) => setActiveView(v as 'table' | 'map')}>
-              <TabsList>
-                <TabsTrigger value="table" className="gap-1.5">
-                  <LayoutList className="h-3.5 w-3.5" />
-                  Table
-                </TabsTrigger>
-                <TabsTrigger value="map" className="gap-1.5">
-                  <MapPinned className="h-3.5 w-3.5" />
-                  Map
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+          <div className="flex items-center gap-2 mb-4">
+            <MapPinned className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-semibold">Contact Map</h2>
           </div>
+          <MapView />
+        </section>
 
-          {activeView === 'table' ? (
-            <ContactsTable
-              contacts={contacts}
-              isLoading={isLoadingContacts}
-              isLoadingMore={isLoadingMore}
-              hasMore={hasMore}
-              selectedIds={selectedIds}
-              fetchingId={fetchingId}
-              fetchProgress={fetchProgress}
-              onSelectionChange={setSelectedIds}
-              onDeleteSelected={handleDeleteSelected}
-              onFetchAddress={handleFetchAddress}
-              isFetchingAddress={isFetchingAddress}
-              onRefresh={() => fetchContacts(debouncedSearch)}
-              onLoadMore={loadMore}
-              total={total}
-              searchQuery={searchQuery}
-              onSearchChange={handleSearchChange}
-              keywordSuffix={keywordSuffix}
-              onKeywordSuffixChange={setKeywordSuffix}
-              sentinelRef={sentinelRef}
-            />
-          ) : (
-            <MapView />
-          )}
+        {/* Contacts Table Section */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <ContactIcon className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-semibold">Saved Contacts</h2>
+          </div>
+          <ContactsTable
+            contacts={contacts}
+            isLoading={isLoadingContacts}
+            isLoadingMore={isLoadingMore}
+            hasMore={hasMore}
+            selectedIds={selectedIds}
+            fetchingId={fetchingId}
+            fetchProgress={fetchProgress}
+            onSelectionChange={setSelectedIds}
+            onDeleteSelected={handleDeleteSelected}
+            onFetchAddress={handleFetchAddress}
+            isFetchingAddress={isFetchingAddress}
+            onRefresh={() => fetchContacts(debouncedSearch)}
+            onLoadMore={loadMore}
+            total={total}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+            keywordSuffix={keywordSuffix}
+            onKeywordSuffixChange={setKeywordSuffix}
+            sentinelRef={sentinelRef}
+          />
         </section>
 
         {/* Upload Section — Toggleable */}
