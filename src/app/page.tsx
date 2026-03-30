@@ -342,7 +342,7 @@ export default function Home() {
           <div>
             <h1 className="text-xl font-bold tracking-tight">Alpha System Database</h1>
             <p className="text-sm text-muted-foreground">
-              Extract phone numbers &amp; addresses from table images
+              Database Whatsapp dan Pemetaan Wilayah
             </p>
           </div>
         </div>
