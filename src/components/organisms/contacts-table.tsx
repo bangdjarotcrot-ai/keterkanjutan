@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback } from 'react'
-import { RefObject } from 'react'
 import {
   Trash2,
   MapPin,
@@ -10,6 +9,7 @@ import {
   Users,
   AlertTriangle,
   Search,
+  X,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -32,6 +32,7 @@ interface ContactsTableProps {
   onSelectionChange: (ids: Set<string>) => void
   onDeleteSelected: () => void
   onFetchAddress: () => void
+  onCancelFetchAddress: () => void
   isFetchingAddress: boolean
   onRefresh: () => void
   onLoadMore: () => void
@@ -53,6 +54,7 @@ export function ContactsTable({
   onSelectionChange,
   onDeleteSelected,
   onFetchAddress,
+  onCancelFetchAddress,
   isFetchingAddress,
   onRefresh,
   onLoadMore,
@@ -150,6 +152,16 @@ export function ContactsTable({
                 ? `Fetching ${fetchProgress.current}/${fetchProgress.total}...`
                 : 'Fetch Address Detail'}
             </Button>
+            {isFetchingAddress && (
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={onCancelFetchAddress}
+              >
+                <X className="h-4 w-4" />
+                Cancel
+              </Button>
+            )}
             <Button
               variant="destructive"
               size="sm"
@@ -160,10 +172,33 @@ export function ContactsTable({
               Delete Selected
             </Button>
           </div>
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <AlertTriangle className="h-3 w-3 shrink-0" />
-            ~1 sec/contact &middot; Region: <span className="font-medium text-foreground">{keywordSuffix}</span>
-          </p>
+          {!isFetchingAddress && (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  const withAddress = contacts.filter(
+                    (c) => selectedIds.has(c.id) && c.kecamatan && c.kelurahan && c.kota && c.provinsi
+                  )
+                  if (withAddress.length === 0) return
+                  const newSelected = new Set(selectedIds)
+                  withAddress.forEach((c) => newSelected.delete(c.id))
+                  onSelectionChange(newSelected)
+                }}
+                disabled={contacts.filter(
+                  (c) => selectedIds.has(c.id) && c.kecamatan && c.kelurahan && c.kota && c.provinsi
+                ).length === 0}
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors disabled:opacity-40 disabled:pointer-events-none"
+              >
+                <MapPin className="h-3 w-3" />
+                Deselect with Address
+              </button>
+              <span className="text-muted-foreground/40">|</span>
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <AlertTriangle className="h-3 w-3 shrink-0" />
+                ~1 sec/contact &middot; Region: <span className="font-medium text-foreground">{keywordSuffix}</span>
+              </p>
+            </div>
+          )}
         </div>
       )}
 

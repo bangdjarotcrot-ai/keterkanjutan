@@ -56,8 +56,17 @@ export default function Home() {
   // Keyword suffix for address search
   const [keywordSuffix, setKeywordSuffix] = useKeywordSuffix()
 
-  // Abort ref for extraction
+  // Abort ref for extraction & address fetching
   const abortRef = useRef(false)
+
+  // Cancel address fetching
+  const handleCancelFetchAddress = useCallback(() => {
+    abortRef.current = true
+    setIsFetchingAddress(false)
+    setFetchingId(null)
+    setFetchProgress(null)
+    toast({ title: 'Cancelled', description: 'Address fetching has been cancelled.' })
+  }, [toast])
 
   // Fetch contacts (first page or new search)
   const fetchContacts = useCallback(async (search?: string) => {
@@ -249,11 +258,14 @@ export default function Home() {
 
     setIsFetchingAddress(true)
     setFetchProgress({ current: 0, total: ids.length })
+    abortRef.current = false
 
     let successCount = 0
     let failCount = 0
 
     for (let i = 0; i < ids.length; i++) {
+      if (abortRef.current) break
+
       const contactId = ids[i]
       setFetchingId(contactId)
       setFetchProgress({ current: i + 1, total: ids.length })
@@ -309,11 +321,13 @@ export default function Home() {
     setIsFetchingAddress(false)
     setSelectedIds(new Set())
 
-    toast({
-      title: 'Address fetching complete',
-      description: `${successCount} found, ${failCount} not found.`,
-      ...(failCount > 0 ? { variant: 'destructive' } : {}),
-    })
+    if (!abortRef.current) {
+      toast({
+        title: 'Address fetching complete',
+        description: `${successCount} found, ${failCount} not found.`,
+        ...(failCount > 0 ? { variant: 'destructive' } : {}),
+      })
+    }
   }, [selectedIds, keywordSuffix, toast])
 
   return (
@@ -356,6 +370,7 @@ export default function Home() {
             onSelectionChange={setSelectedIds}
             onDeleteSelected={handleDeleteSelected}
             onFetchAddress={handleFetchAddress}
+            onCancelFetchAddress={handleCancelFetchAddress}
             isFetchingAddress={isFetchingAddress}
             onRefresh={() => fetchContacts(debouncedSearch)}
             onLoadMore={loadMore}
