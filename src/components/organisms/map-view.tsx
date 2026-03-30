@@ -6,7 +6,6 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import Supercluster from 'supercluster'
 import { MapControls } from '@/components/molecules/map-controls'
-import { MapMarkerPopup } from '@/components/atoms/map-marker'
 
 // Fix Leaflet default marker icon issue with bundlers
 delete (L.Icon.Default.prototype as Record<string, unknown>)._getIconUrl
@@ -38,24 +37,11 @@ interface ClusterProperties {
 
 interface GeoPoint {
   type: 'Feature'
-  properties: GeoContact | ClusterProperties
+  properties: GeoContact & Partial<ClusterProperties>
   geometry: {
     type: 'Point'
     coordinates: [number, number]
   }
-}
-
-// Fit bounds helper component
-function FitBoundsHandler({ contacts }: { contacts: GeoContact[] | null }) {
-  const map = useMap()
-
-  useEffect(() => {
-    if (!contacts || contacts.length === 0) return
-    const bounds = L.latLngBounds(contacts.map((c) => [c.latitude, c.longitude]))
-    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 })
-  }, [contacts, map])
-
-  return null
 }
 
 // Create cluster icon
@@ -76,23 +62,45 @@ function createClusterIcon(count: number) {
   })
 }
 
-export function MapView() {
-  const [contacts, setContacts] = useState<GeoContact[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [isReady, setIsReady] = useState(false)
-  const [geoJsonFeatures, setGeoJsonFeatures] = useState<GeoPoint[]>([])
-  const [allContacts, setAllContacts] = useState<GeoContact[]>([])
+// Normalize phone for WhatsApp link
+function normalizePhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '')
+  return digits.startsWith('8') ? `62${digits}` : digits
+}
 
+interface MapLayerControllerProps {
+  contacts: GeoContact[]
+  onMapReady?: (map: L.Map) => void
+}
+
+// Child component that uses useMap() to access the Leaflet map instance
+function MapLayerController({ contacts, onMapReady }: MapLayerControllerProps) {
+  const map = useMap()
+  const markersLayerRef = useRef<L.LayerGroup | null>(null)
   const clusterRef = useRef<Supercluster | null>(null)
-  const markersLayerRef = useRef<L.LayerGroup>(L.layerGroup())
-  const mapRef = useRef<L.Map | null>(null)
+  const isFirstRender = useRef(true)
 
-  // Build supercluster from contacts
-  const buildCluster = useCallback((data: GeoContact[]) => {
-    if (data.length === 0) return
+  // Initialize map — attach to parent + create markers layer
+  useEffect(() => {
+    if (!markersLayerRef.current) {
+      markersLayerRef.current = L.layerGroup().addTo(map)
+    }
+    if (onMapReady) {
+      onMapReady(map)
+    }
+  }, [map, onMapReady])
 
-    const features: GeoPoint[] = data.map((c) => ({
-      type: 'Feature',
+  // Build supercluster when contacts change
+  useEffect(() => {
+    if (contacts.length === 0) {
+      if (markersLayerRef.current) {
+        markersLayerRef.current.clearLayers()
+      }
+      return
+    }
+
+    const features: GeoPoint[] = contacts.map((c) => ({
+      type: 'Feature' as const,
       properties: {
         id: c.id,
         name: c.name,
@@ -106,12 +114,10 @@ export function MapView() {
         point_count_abbreviated: '',
       },
       geometry: {
-        type: 'Point',
+        type: 'Point' as const,
         coordinates: [c.longitude, c.latitude],
       },
     }))
-
-    setGeoJsonFeatures(features)
 
     const cluster = new Supercluster({
       radius: 50,
@@ -119,65 +125,99 @@ export function MapView() {
     })
     cluster.load(features)
     clusterRef.current = cluster
-  }, [])
 
-  // Render markers for current map bounds
-  const updateMarkers = useCallback(() => {
-    const map = mapRef.current
-    const cluster = clusterRef.current
-    if (!map || !cluster) return
+    // Render immediately on first load
+    updateMarkers(map, cluster, markersLayerRef.current!)
+  }, [contacts])
 
-    const bounds = map.getBounds()
-    const zoom = Math.round(map.getZoom())
-
-    const visibleClusters = cluster.getClusters(
-      [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()],
-      zoom
-    )
-
-    markersLayerRef.current.clearLayers()
-
-    visibleClusters.forEach((item) => {
-      const [lon, lat] = item.geometry.coordinates
-      const props = item.properties
-
-      if (props.cluster) {
-        const marker = L.marker([lat, lon], {
-          icon: createClusterIcon(props.point_count),
-        })
-        marker.on('click', () => {
-          map.fitBounds(L.geoJSON(item).getBounds(), { padding: [50, 50] })
-        })
-        markersLayerRef.current!.addLayer(marker)
-      } else {
-        const contact = props as unknown as GeoContact
-        const marker = L.marker([lat, lon])
-        const popupContent = document.createElement('div')
-        popupContent.innerHTML = document.getElementById('popup-root')?.innerHTML || ''
-
-        // Use React rendering approach — we'll set popup content via HTML string
-        marker.bindPopup(`
-          <div class="leaflet-popup-content-wrapper">
-            <div class="leaflet-popup-content" style="margin:8px 12px;">
-              <strong style="font-size:13px;">${contact.name}</strong>
-              <div style="margin-top:6px;font-size:12px;color:#666;">
-                📞 ${contact.phone}
-              </div>
-              <div style="margin-top:4px;">
-                <a href="https://wa.me/${contact.phone.replace(/\D/g, '').startsWith('8') ? '62' + contact.phone.replace(/\D/g, '') : contact.phone.replace(/\D/g, '')}" 
-                   target="_blank" rel="noopener noreferrer"
-                   style="font-size:12px;color:#16a34a;font-weight:500;text-decoration:none;">
-                  💬 WhatsApp
-                </a>
-              </div>
-              ${contact.fullAddress ? `<div style="margin-top:4px;font-size:11px;color:#888;line-height:1.4;">📍 ${contact.fullAddress}</div>` : ''}
-            </div>
-          </div>
-        `)
-        markersLayerRef.current!.addLayer(marker)
+  // Attach map event listeners
+  useEffect(() => {
+    const handleMoveEnd = () => {
+      if (clusterRef.current && markersLayerRef.current) {
+        updateMarkers(map, clusterRef.current, markersLayerRef.current)
       }
-    })
-  }, [])
+    }
+
+    map.on('moveend', handleMoveEnd)
+    map.on('zoomend', handleMoveEnd)
+
+    return () => {
+      map.off('moveend', handleMoveEnd)
+      map.off('zoomend', handleMoveEnd)
+    }
+  }, [map])
+
+  // Auto-fit bounds on first load
+  useEffect(() => {
+    if (isFirstRender.current && contacts.length > 0) {
+      isFirstRender.current = false
+      const bounds = L.latLngBounds(contacts.map((c) => [c.latitude, c.longitude]))
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 })
+    } else if (contacts.length > 0) {
+      isFirstRender.current = false
+    }
+  }, [contacts, map])
+
+  return null
+}
+
+// Extracted function to render markers from cluster data
+function updateMarkers(map: L.Map, cluster: Supercluster, layer: L.LayerGroup) {
+  const bounds = map.getBounds()
+  const zoom = Math.round(map.getZoom())
+
+  const visibleClusters = cluster.getClusters(
+    [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()],
+    zoom
+  )
+
+  layer.clearLayers()
+
+  visibleClusters.forEach((item) => {
+    const [lon, lat] = item.geometry.coordinates
+    const props = item.properties
+
+    if (props.cluster) {
+      const marker = L.marker([lat, lon], {
+        icon: createClusterIcon(props.point_count),
+      })
+      marker.on('click', () => {
+        map.fitBounds(L.geoJSON(item).getBounds(), { padding: [50, 50] })
+      })
+      layer.addLayer(marker)
+    } else {
+      const contact = props as unknown as GeoContact
+      const waPhone = normalizePhone(contact.phone)
+      const marker = L.marker([lat, lon])
+      marker.bindPopup(`
+        <div style="min-width:180px;">
+          <strong style="font-size:13px;">${contact.name}</strong>
+          <div style="margin-top:6px;font-size:12px;color:#666;">
+            📞 ${contact.phone}
+          </div>
+          <div style="margin-top:4px;">
+            <a href="https://wa.me/${waPhone}"
+               target="_blank" rel="noopener noreferrer"
+               style="font-size:12px;color:#16a34a;font-weight:500;text-decoration:none;">
+              💬 WhatsApp
+            </a>
+          </div>
+          ${contact.fullAddress ? `<div style="margin-top:4px;font-size:11px;color:#888;line-height:1.4;">📍 ${contact.fullAddress}</div>` : ''}
+        </div>
+      `)
+      layer.addLayer(marker)
+    }
+  })
+}
+
+interface MapViewProps {
+  onMapReady?: (map: L.Map) => void
+}
+
+export function MapView({ onMapReady }: MapViewProps) {
+  const [contacts, setContacts] = useState<GeoContact[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const mapRef = useRef<L.Map | null>(null)
 
   // Fetch map data
   const fetchMapData = useCallback(async () => {
@@ -187,7 +227,6 @@ export function MapView() {
       const data = await res.json()
 
       if (data.success) {
-        setAllContacts(data.contacts)
         setContacts(data.contacts)
       }
     } catch (error) {
@@ -202,40 +241,19 @@ export function MapView() {
     fetchMapData()
   }, [fetchMapData])
 
-  // Build cluster when contacts change
-  useEffect(() => {
-    if (contacts.length > 0) {
-      buildCluster(contacts)
-    }
-  }, [contacts, buildCluster])
-
-  // Update markers when geoJsonFeatures or map ready
-  useEffect(() => {
-    if (isReady && clusterRef.current) {
-      updateMarkers()
-    }
-  }, [isReady, updateMarkers])
-
-  const handleMapCreated = useCallback((map: L.Map) => {
+  // Handle map ready from child
+  const handleMapReady = useCallback((map: L.Map) => {
     mapRef.current = map
-    setIsReady(true)
+    if (onMapReady) onMapReady(map)
+  }, [onMapReady])
 
-    // Re-render markers on zoom/move end
-    map.on('moveend', () => {
-      updateMarkers()
-    })
-    map.on('zoomend', () => {
-      updateMarkers()
-    })
-  }, [updateMarkers])
-
-  // Expose fitBounds and refresh
+  // Fit bounds handler
   const handleFitBounds = useCallback(() => {
-    if (allContacts.length > 0 && mapRef.current) {
-      const bounds = L.latLngBounds(allContacts.map((c) => [c.latitude, c.longitude]))
+    if (contacts.length > 0 && mapRef.current) {
+      const bounds = L.latLngBounds(contacts.map((c) => [c.latitude, c.longitude]))
       mapRef.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 })
     }
-  }, [allContacts])
+  }, [contacts])
 
   return (
     <div className="relative w-full h-[500px] rounded-lg overflow-hidden border bg-muted/30">
@@ -258,16 +276,18 @@ export function MapView() {
             zoom={6}
             className="w-full h-full z-0"
             zoomControl={false}
-            ref={handleMapCreated}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <FitBoundsHandler contacts={allContacts} />
+            <MapLayerController
+              contacts={contacts}
+              onMapReady={handleMapReady}
+            />
           </MapContainer>
           <MapControls
-            totalPins={allContacts.length}
+            totalPins={contacts.length}
             onFitBounds={handleFitBounds}
             onRefresh={fetchMapData}
             isLoading={isLoading}

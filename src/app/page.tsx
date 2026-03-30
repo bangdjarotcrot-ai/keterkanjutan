@@ -5,7 +5,19 @@ import { Contact as ContactIcon, Smartphone, ChevronDown, ImagePlus, LayoutList,
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UploadSection, type ExtractionProgress } from '@/components/organisms/upload-section'
 import { ContactsTable } from '@/components/organisms/contacts-table'
-import { MapView } from '@/components/organisms/map-view'
+import dynamic from 'next/dynamic'
+
+const MapView = dynamic(() => import('@/components/organisms/map-view').then((m) => m.MapView), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-[500px] rounded-lg border bg-muted/30">
+      <div className="text-center">
+        <div className="animate-spin h-8 w-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-2"></div>
+        <p className="text-sm text-muted-foreground">Loading map...</p>
+      </div>
+    </div>
+  ),
+})
 import { useToast } from '@/hooks/use-toast'
 import { useDebounce } from '@/hooks/use-debounce'
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'

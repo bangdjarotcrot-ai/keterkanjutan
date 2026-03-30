@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+// GET /api/contacts/map-data - Returns contacts with coordinates for map display
 export async function GET() {
   try {
     const contacts = await db.contact.findMany({
@@ -24,10 +25,11 @@ export async function GET() {
       count: contacts.length,
       contacts,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
     console.error('Map data error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch map data' },
+      { error: 'Failed to fetch map data', details: message },
       { status: 500 }
     );
   }
