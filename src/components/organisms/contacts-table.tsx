@@ -28,7 +28,7 @@ interface ContactsTableProps {
   hasMore: boolean
   selectedIds: Set<string>
   fetchingId: string | null
-  fetchProgress: { current: number; total: number } | null
+  fetchProgress: { current: number; total: number; pass: number } | null
   onSelectionChange: (ids: Set<string>) => void
   onDeleteSelected: () => void
   onFetchAddress: () => void
@@ -149,7 +149,9 @@ export function ContactsTable({
                 <MapPin className="h-4 w-4" />
               )}
               {fetchProgress
-                ? `Fetching ${fetchProgress.current}/${fetchProgress.total}...`
+                ? fetchProgress.pass === 1
+                  ? `Fetching ${fetchProgress.current}/${fetchProgress.total}...`
+                  : `Retrying ${fetchProgress.current}/${fetchProgress.total}...`
                 : 'Fetch Address Detail'}
             </Button>
             {isFetchingAddress && (

@@ -52,7 +52,7 @@ export default function Home() {
   // Address fetching state (frontend-driven)
   const [isFetchingAddress, setIsFetchingAddress] = useState(false)
   const [fetchingId, setFetchingId] = useState<string | null>(null)
-  const [fetchProgress, setFetchProgress] = useState<{ current: number; total: number } | null>(null)
+  const [fetchProgress, setFetchProgress] = useState<{ current: number; total: number; pass: number } | null>(null)
 
   // Keyword suffix for address search
   const [keywordSuffix, setKeywordSuffix] = useKeywordSuffix()
@@ -252,71 +252,97 @@ export default function Home() {
     }
   }, [selectedIds, debouncedSearch, fetchContacts, toast])
 
-  // Handle fetch address — frontend-driven sequential loop
+  // Handle fetch address — two-pass sequential loop
   const handleFetchAddress = useCallback(async () => {
     const ids = Array.from(selectedIds)
     if (ids.length === 0) return
 
     setIsFetchingAddress(true)
-    setFetchProgress({ current: 0, total: ids.length })
     abortRef.current = false
 
-    let successCount = 0
-    let failCount = 0
+    // Helper: update contact locally from API response
+    const updateContactLocal = (contactId: string, updated: Record<string, unknown>) => {
+      setContacts((prev) =>
+        prev.map((c) => (c.id === contactId ? { ...c, ...updated } : c))
+      )
+    }
+
+    // ===================== PASS 1: Strategy 1 =====================
+    const pass1FailedIds: string[] = []
+    let pass1Success = 0
 
     for (let i = 0; i < ids.length; i++) {
       if (abortRef.current) break
 
       const contactId = ids[i]
       setFetchingId(contactId)
-      setFetchProgress({ current: i + 1, total: ids.length })
+      setFetchProgress({ current: i + 1, total: ids.length, pass: 1 })
 
       try {
         const res = await fetch('/api/contacts/fetch-address', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: contactId, keywordSuffix }),
+          body: JSON.stringify({ id: contactId, keywordSuffix, strategies: [1] }),
         })
         const data = await res.json()
 
         if (data.success && data.contact) {
-          // Update locally — no refetch needed
-          const updated = data.contact
-          setContacts((prev) =>
-            prev.map((c) =>
-              c.id === contactId
-                ? {
-                    ...c,
-                    kecamatan: updated.kecamatan,
-                    kelurahan: updated.kelurahan,
-                    kota: updated.kota,
-                    provinsi: updated.provinsi,
-                    latitude: updated.latitude,
-                    longitude: updated.longitude,
-                    fullAddress: updated.fullAddress,
-                    postcode: updated.postcode,
-                  }
-                : c
-            )
-          )
-          successCount++
-          console.log(`[FetchAddress] ${i + 1}/${ids.length} ✅ ${updated.name}`)
+          updateContactLocal(contactId, data.contact)
+          pass1Success++
         } else {
-          failCount++
-          console.warn(`[FetchAddress] ${i + 1}/${ids.length} ❌ ${data.error || 'Unknown error'}`)
+          pass1FailedIds.push(contactId)
         }
-      } catch (err) {
-        failCount++
-        console.error(`[FetchAddress] ${i + 1}/${ids.length} ❌ Network error:`, err)
+      } catch {
+        pass1FailedIds.push(contactId)
       }
 
       setFetchingId(null)
+      if (i < ids.length - 1 && !abortRef.current) await delay(1100)
+    }
 
-      // 1-second delay between requests (Nominatim rate limit)
-      if (i < ids.length - 1) {
-        await delay(1100)
+    // ===================== PASS 2: Strategies 2,3,4 =====================
+    let pass2Success = 0
+
+    if (!abortRef.current && pass1FailedIds.length > 0) {
+      // Show pass 1 summary
+      toast({
+        title: 'Pass 1 complete',
+        description: `${pass1Success} found, ${pass1FailedIds.length} failed. Starting retry...`,
+        ...(pass1FailedIds.length > 0 ? {} : {}),
+      })
+      await delay(2000)
+
+      for (let i = 0; i < pass1FailedIds.length; i++) {
+        if (abortRef.current) break
+
+        const contactId = pass1FailedIds[i]
+        setFetchingId(contactId)
+        setFetchProgress({ current: i + 1, total: pass1FailedIds.length, pass: 2 })
+
+        try {
+          const res = await fetch('/api/contacts/fetch-address', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: contactId, keywordSuffix, strategies: [2, 3, 4] }),
+          })
+          const data = await res.json()
+
+          if (data.success && data.contact) {
+            updateContactLocal(contactId, data.contact)
+            pass2Success++
+          }
+        } catch {
+          // continue
+        }
+
+        setFetchingId(null)
+        if (i < pass1FailedIds.length - 1 && !abortRef.current) await delay(1100)
       }
     }
+
+    // ===================== DONE =====================
+    const totalSuccess = pass1Success + pass2Success
+    const totalFailed = pass1FailedIds.length - pass2Success
 
     setFetchProgress(null)
     setIsFetchingAddress(false)
@@ -325,8 +351,8 @@ export default function Home() {
     if (!abortRef.current) {
       toast({
         title: 'Address fetching complete',
-        description: `${successCount} found, ${failCount} not found.`,
-        ...(failCount > 0 ? { variant: 'destructive' } : {}),
+        description: `${totalSuccess} found, ${totalFailed} not found.`,
+        ...(totalFailed > 0 ? { variant: 'destructive' } : {}),
       })
     }
   }, [selectedIds, keywordSuffix, toast])
