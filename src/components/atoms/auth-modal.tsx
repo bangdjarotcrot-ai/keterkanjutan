@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Lock, Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,7 +11,6 @@ const AUTH_USER = 'alpha'
 const AUTH_PASS = 'system123'
 
 function checkAuth(): boolean {
-  if (typeof window === 'undefined') return false
   const stored = localStorage.getItem(AUTH_KEY)
   if (!stored) return false
   try {
@@ -23,7 +22,13 @@ function checkAuth(): boolean {
 }
 
 export function AuthModal() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => checkAuth())
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  // Check localStorage after hydration to avoid mismatch
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- standard hydration guard for localStorage
+    setIsAuthenticated(checkAuth())
+  }, [])
   const [user, setUser] = useState('')
   const [pass, setPass] = useState('')
   const [showPass, setShowPass] = useState(false)
