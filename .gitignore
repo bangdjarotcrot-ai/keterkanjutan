@@ -48,7 +48,8 @@ prompt
 
 server.log
 # Skills directory
-/skills/db/*.db
+/skills
+db/*.db
 db/*.db-journal
 upload/
 worklog.md
