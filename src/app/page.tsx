@@ -24,8 +24,6 @@ import type { Contact } from '@/components/molecules/export-button'
 import { useKeywordSuffix } from '@/components/molecules/keyword-settings'
 import { AuthModal } from '@/components/atoms/auth-modal'
 
-const PAGE_SIZE = 50
-
 export default function Home() {
   const { toast } = useToast()
 
@@ -35,12 +33,12 @@ export default function Home() {
   const [extractionProgress, setExtractionProgress] = useState<ExtractionProgress | null>(null)
   const [isUploadVisible, setIsUploadVisible] = useState(false)
 
-  // Contacts state (infinite scroll)
+  // Contacts pagination state
   const [contacts, setContacts] = useState<Contact[]>([])
   const [total, setTotal] = useState(0)
-  const [hasMore, setHasMore] = useState(false)
   const [isLoadingContacts, setIsLoadingContacts] = useState(false)
-  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(50)
 
   // Search (server-side with debounce)
   const [searchQuery, setSearchQuery] = useState('')
@@ -69,13 +67,16 @@ export default function Home() {
     toast({ title: 'Cancelled', description: 'Address fetching has been cancelled.' })
   }, [toast])
 
-  // Fetch contacts (first page or new search)
-  const fetchContacts = useCallback(async (search?: string) => {
+  // Fetch contacts for a given page
+  const fetchContacts = useCallback(async (page?: number, size?: number, search?: string) => {
     const query = search !== undefined ? search : debouncedSearch
+    const p = page ?? currentPage
+    const s = size ?? pageSize
     setIsLoadingContacts(true)
 
     try {
-      const params = new URLSearchParams({ limit: String(PAGE_SIZE) })
+      const offset = (p - 1) * s
+      const params = new URLSearchParams({ limit: String(s), offset: String(offset) })
       if (query.trim()) params.set('search', query.trim())
 
       const res = await fetch(`/api/contacts?${params}`)
@@ -84,41 +85,26 @@ export default function Home() {
       if (data.success) {
         setContacts(data.contacts)
         setTotal(data.total)
-        setHasMore(data.hasMore)
       }
     } catch (error) {
       console.error('Failed to fetch contacts:', error)
     } finally {
       setIsLoadingContacts(false)
     }
-  }, [debouncedSearch])
+  }, [currentPage, pageSize, debouncedSearch])
 
-  // Load more contacts
-  const loadMore = useCallback(async () => {
-    if (isLoadingMore || !hasMore) return
-    setIsLoadingMore(true)
+  // Page change handler
+  const handlePageChange = useCallback((page: number) => {
+    setCurrentPage(page)
+    fetchContacts(page)
+  }, [fetchContacts])
 
-    try {
-      const params = new URLSearchParams({
-        limit: String(PAGE_SIZE),
-        offset: String(contacts.length),
-      })
-      if (debouncedSearch.trim()) params.set('search', debouncedSearch.trim())
-
-      const res = await fetch(`/api/contacts?${params}`)
-      const data = await res.json()
-
-      if (data.success) {
-        setContacts((prev) => [...prev, ...data.contacts])
-        setHasMore(data.hasMore)
-        setTotal(data.total)
-      }
-    } catch (error) {
-      console.error('Failed to load more contacts:', error)
-    } finally {
-      setIsLoadingMore(false)
-    }
-  }, [isLoadingMore, hasMore, contacts.length, debouncedSearch])
+  // Page size change handler
+  const handlePageSizeChange = useCallback((size: number) => {
+    setPageSize(size)
+    setCurrentPage(1)
+    fetchContacts(1, size)
+  }, [fetchContacts])
 
   // Initial load
   useEffect(() => {
@@ -130,10 +116,11 @@ export default function Home() {
     fetchContacts(debouncedSearch)
   }, [debouncedSearch, fetchContacts])
 
-  // Handle search change (immediate UI update, debounced API call)
+  // Handle search change (immediate UI update, debounced API call, reset to page 1)
   const handleSearchChange = useCallback((value: string) => {
     setSearchQuery(value)
     setSelectedIds(new Set())
+    setCurrentPage(1)
   }, [])
 
   // Handle multiple image selection
@@ -391,8 +378,6 @@ export default function Home() {
           <ContactsTable
             contacts={contacts}
             isLoading={isLoadingContacts}
-            isLoadingMore={isLoadingMore}
-            hasMore={hasMore}
             selectedIds={selectedIds}
             fetchingId={fetchingId}
             fetchProgress={fetchProgress}
@@ -402,8 +387,11 @@ export default function Home() {
             onCancelFetchAddress={handleCancelFetchAddress}
             isFetchingAddress={isFetchingAddress}
             onRefresh={() => fetchContacts(debouncedSearch)}
-            onLoadMore={loadMore}
             total={total}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
             searchQuery={searchQuery}
             onSearchChange={handleSearchChange}
             keywordSuffix={keywordSuffix}

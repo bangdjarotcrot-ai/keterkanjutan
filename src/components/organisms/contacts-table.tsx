@@ -20,12 +20,11 @@ import { ExportButton, type Contact } from '@/components/molecules/export-button
 import { ContactRow } from '@/components/molecules/contact-row'
 import { KeywordSettings } from '@/components/molecules/keyword-settings'
 import { EmptyState } from '@/components/atoms/empty-state'
+import { Pagination, PageSizeSelector } from '@/components/molecules/pagination'
 
 interface ContactsTableProps {
   contacts: Contact[]
   isLoading: boolean
-  isLoadingMore: boolean
-  hasMore: boolean
   selectedIds: Set<string>
   fetchingId: string | null
   fetchProgress: { current: number; total: number; pass: number } | null
@@ -35,8 +34,11 @@ interface ContactsTableProps {
   onCancelFetchAddress: () => void
   isFetchingAddress: boolean
   onRefresh: () => void
-  onLoadMore: () => void
   total: number
+  currentPage: number
+  pageSize: number
+  onPageChange: (page: number) => void
+  onPageSizeChange: (size: number) => void
   searchQuery: string
   onSearchChange: (value: string) => void
   keywordSuffix: string
@@ -46,8 +48,6 @@ interface ContactsTableProps {
 export function ContactsTable({
   contacts,
   isLoading,
-  isLoadingMore,
-  hasMore,
   selectedIds,
   fetchingId,
   fetchProgress,
@@ -57,8 +57,11 @@ export function ContactsTable({
   onCancelFetchAddress,
   isFetchingAddress,
   onRefresh,
-  onLoadMore,
   total,
+  currentPage,
+  pageSize,
+  onPageChange,
+  onPageSizeChange,
   searchQuery,
   onSearchChange,
   keywordSuffix,
@@ -67,6 +70,10 @@ export function ContactsTable({
   const allSelected =
     contacts.length > 0 &&
     contacts.every((c) => selectedIds.has(c.id))
+
+  const totalPages = Math.ceil(total / pageSize)
+  const showingFrom = total === 0 ? 0 : (currentPage - 1) * pageSize + 1
+  const showingTo = Math.min(currentPage * pageSize, total)
 
   const handleSelectAll = () => {
     if (allSelected) {
@@ -301,60 +308,43 @@ export function ContactsTable({
                   </td>
                 </tr>
               ) : (
-                <>
-                  {contacts.map((contact) => (
-                    <ContactRow
-                      key={contact.id}
-                      contact={contact}
-                      isSelected={selectedIds.has(contact.id)}
-                      isFetching={fetchingId === contact.id}
-                      onSelect={handleSelectOne}
-                      onDelete={handleDeleteOne}
-                    />
-                  ))}
-
-                  {/* Load more button */}
-                  {hasMore && (
-                    <tr>
-                      <td colSpan={10}>
-                        <div className="flex items-center justify-center py-4">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={onLoadMore}
-                            disabled={isLoadingMore}
-                            className="gap-2"
-                          >
-                            {isLoadingMore ? (
-                              <>
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                                Loading more...
-                              </>
-                            ) : (
-                              'Load More'
-                            )}
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </>
+                contacts.map((contact) => (
+                  <ContactRow
+                    key={contact.id}
+                    contact={contact}
+                    isSelected={selectedIds.has(contact.id)}
+                    isFetching={fetchingId === contact.id}
+                    onSelect={handleSelectOne}
+                    onDelete={handleDeleteOne}
+                  />
+                ))
               )}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Footer stats */}
+      {/* Pagination footer */}
       {!isLoading && contacts.length > 0 && (
-        <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
-          <span>
-            Showing {contacts.length} of {total} contacts
-            {searchQuery && ` matching "${searchQuery}"`}
-          </span>
-          {selectedIds.size > 0 && (
-            <span>{selectedIds.size} contact(s) selected</span>
-          )}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-1">
+          <PageSizeSelector
+            pageSize={pageSize}
+            onPageSizeChange={onPageSizeChange}
+            total={total}
+          />
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs text-muted-foreground">
+              Showing {showingFrom.toLocaleString()}–{showingTo.toLocaleString()} of {total.toLocaleString()}
+            </span>
+            {selectedIds.size > 0 && (
+              <span className="text-xs text-muted-foreground">{selectedIds.size} contact(s) selected</span>
+            )}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
       )}
     </div>
