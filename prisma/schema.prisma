@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  address     String
+  kecamatan   String?
+  kelurahan   String?
+  kota        String?
+  provinsi    String?
+  latitude    Float?
+  longitude   Float?
+  fullAddress String?
+  postcode    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
