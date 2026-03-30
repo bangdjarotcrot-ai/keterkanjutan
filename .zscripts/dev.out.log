@@ -3217,3 +3217,188 @@ prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id`
 prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
  GET /api/contacts?limit=50 200 in 5ms (compile: 1244µs, render: 4ms)
 ✓ Compiled in 228ms
+⨯ ReferenceError: window is not defined
+    at module evaluation (src/components/organisms/map-view.tsx:4:1)
+    at module evaluation (src/app/page.tsx:8:1)
+  2 |
+  3 | import { useState, useEffect, useRef, useCallback } from 'react'
+> 4 | import L from 'leaflet'
+    | ^
+  5 | import 'leaflet/dist/leaflet.css'
+  6 | import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+  7 | import Supercluster from 'supercluster' {
+  digest: '828633576'
+}
+ GET / 500 in 747ms (compile: 56ms, render: 691ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src/components/organisms/map-view.tsx:4:1)
+    at module evaluation (src/app/page.tsx:8:1)
+  2 |
+  3 | import { useState, useEffect, useRef, useCallback } from 'react'
+> 4 | import L from 'leaflet'
+    | ^
+  5 | import 'leaflet/dist/leaflet.css'
+  6 | import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+  7 | import Supercluster from 'supercluster' {
+  digest: '828633576'
+}
+ GET / 500 in 359ms (compile: 3ms, render: 356ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 9ms (compile: 3ms, render: 6ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1309µs, render: 4ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src/components/organisms/map-view.tsx:4:1)
+    at module evaluation (src/app/page.tsx:8:1)
+  2 |
+  3 | import { useState, useEffect, useRef, useCallback } from 'react'
+> 4 | import L from 'leaflet'
+    | ^
+  5 | import 'leaflet/dist/leaflet.css'
+  6 | import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+  7 | import Supercluster from 'supercluster' {
+  digest: '828633576'
+}
+ GET / 500 in 386ms (compile: 1885µs, render: 384ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1376µs, render: 5ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1557µs, render: 5ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 10ms (compile: 2ms, render: 8ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1194µs, render: 4ms)
+Map data error: Error [PrismaClientValidationError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].contact.findMany()` invocation in
+/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__f0567a82._.js:74:161
+
+  71 ;
+  72 async function GET() {
+  73     try {
+→ 74         const contacts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].contact.findMany({
+               where: {
+                 latitude: {
+                 ~~~~~~~~
+                   not: null
+                 },
+                 longitude: {
+                   not: null
+                 },
+             ?   AND?: ContactWhereInput | ContactWhereInput[],
+             ?   OR?: ContactWhereInput[],
+             ?   NOT?: ContactWhereInput | ContactWhereInput[],
+             ?   id?: StringFilter | String,
+             ?   name?: StringFilter | String,
+             ?   phone?: StringFilter | String,
+             ?   address?: StringFilter | String,
+             ?   kecamatan?: StringNullableFilter | String | Null,
+             ?   kelurahan?: StringNullableFilter | String | Null,
+             ?   kota?: StringNullableFilter | String | Null,
+             ?   provinsi?: StringNullableFilter | String | Null,
+             ?   createdAt?: DateTimeFilter | DateTime,
+             ?   updatedAt?: DateTimeFilter | DateTime
+               },
+               select: {
+                 id: true,
+                 name: true,
+                 phone: true,
+                 fullAddress: true,
+                 latitude: true,
+                 longitude: true
+               },
+               orderBy: {
+                 createdAt: "desc"
+               }
+             })
+
+Unknown argument `latitude`. Available options are marked with ?.
+    at <unknown> (src/app/api/contacts/map-data/route.ts:6:39)
+    at async GET (src/app/api/contacts/map-data/route.ts:6:22)
+  4 | export async function GET() {
+  5 |   try {
+> 6 |     const contacts = await db.contact.findMany({
+    |                                       ^
+  7 |       where: {
+  8 |         latitude: { not: null },
+  9 |         longitude: { not: null }, {
+  clientVersion: '6.19.2'
+}
+ GET /api/contacts/map-data 500 in 288ms (compile: 111ms, render: 177ms)
+Map data error: Error [PrismaClientValidationError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].contact.findMany()` invocation in
+/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__f0567a82._.js:74:161
+
+  71 ;
+  72 async function GET() {
+  73     try {
+→ 74         const contacts = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].contact.findMany({
+               where: {
+                 latitude: {
+                 ~~~~~~~~
+                   not: null
+                 },
+                 longitude: {
+                   not: null
+                 },
+             ?   AND?: ContactWhereInput | ContactWhereInput[],
+             ?   OR?: ContactWhereInput[],
+             ?   NOT?: ContactWhereInput | ContactWhereInput[],
+             ?   id?: StringFilter | String,
+             ?   name?: StringFilter | String,
+             ?   phone?: StringFilter | String,
+             ?   address?: StringFilter | String,
+             ?   kecamatan?: StringNullableFilter | String | Null,
+             ?   kelurahan?: StringNullableFilter | String | Null,
+             ?   kota?: StringNullableFilter | String | Null,
+             ?   provinsi?: StringNullableFilter | String | Null,
+             ?   createdAt?: DateTimeFilter | DateTime,
+             ?   updatedAt?: DateTimeFilter | DateTime
+               },
+               select: {
+                 id: true,
+                 name: true,
+                 phone: true,
+                 fullAddress: true,
+                 latitude: true,
+                 longitude: true
+               },
+               orderBy: {
+                 createdAt: "desc"
+               }
+             })
+
+Unknown argument `latitude`. Available options are marked with ?.
+    at <unknown> (src/app/api/contacts/map-data/route.ts:6:39)
+    at async GET (src/app/api/contacts/map-data/route.ts:6:22)
+  4 | export async function GET() {
+  5 |   try {
+> 6 |     const contacts = await db.contact.findMany({
+    |                                       ^
+  7 |       where: {
+  8 |         latitude: { not: null },
+  9 |         longitude: { not: null }, {
+  clientVersion: '6.19.2'
+}
+ GET /api/contacts/map-data 500 in 97ms (compile: 1815µs, render: 95ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src/components/organisms/map-view.tsx:4:1)
+    at module evaluation (src/app/page.tsx:8:1)
+  2 |
+  3 | import { useState, useEffect, useRef, useCallback } from 'react'
+> 4 | import L from 'leaflet'
+    | ^
+  5 | import 'leaflet/dist/leaflet.css'
+  6 | import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+  7 | import Supercluster from 'supercluster' {
+  digest: '828633576'
+}
+ GET / 500 in 473ms (compile: 3ms, render: 469ms)
+[?25h

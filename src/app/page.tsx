@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Contact as ContactIcon, Smartphone, ChevronDown, ImagePlus, MapPinned } from 'lucide-react'
+import { Contact as ContactIcon, ChevronDown, ImagePlus, MapPinned } from 'lucide-react'
+import Image from 'next/image'
 import { UploadSection, type ExtractionProgress } from '@/components/organisms/upload-section'
 import { ContactsTable } from '@/components/organisms/contacts-table'
 import dynamic from 'next/dynamic'
@@ -331,11 +332,15 @@ export default function Home() {
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center gap-3">
-          <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-primary text-primary-foreground">
-            <Smartphone className="h-5 w-5" />
-          </div>
+          <Image
+            src="/logo.png"
+            alt="Alpha System Database"
+            width={40}
+            height={40}
+            className="rounded-lg object-cover"
+          />
           <div>
-            <h1 className="text-xl font-bold tracking-tight">Contact Extractor</h1>
+            <h1 className="text-xl font-bold tracking-tight">Alpha System Database</h1>
             <p className="text-sm text-muted-foreground">
               Extract phone numbers &amp; addresses from table images
             </p>
@@ -424,7 +429,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-4 mt-auto">
         <div className="container mx-auto px-4 flex items-center justify-between text-xs text-muted-foreground">
-          <span>Contact Extractor &mdash; Powered by AI Vision</span>
+          <span>Alpha System Database &mdash; Powered by AI Vision</span>
           <span>Address data from OpenStreetMap</span>
         </div>
       </footer>
