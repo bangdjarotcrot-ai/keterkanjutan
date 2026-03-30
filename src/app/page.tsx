@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Contact as ContactIcon, Smartphone } from 'lucide-react'
+import { Contact as ContactIcon, Smartphone, ChevronDown, ImagePlus, LayoutList, MapPinned } from 'lucide-react'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UploadSection, type ExtractionProgress } from '@/components/organisms/upload-section'
 import { ContactsTable } from '@/components/organisms/contacts-table'
+import { MapView } from '@/components/organisms/map-view'
 import { useToast } from '@/hooks/use-toast'
 import { useDebounce } from '@/hooks/use-debounce'
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'
@@ -19,6 +21,8 @@ export default function Home() {
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
   const [isExtracting, setIsExtracting] = useState(false)
   const [extractionProgress, setExtractionProgress] = useState<ExtractionProgress | null>(null)
+  const [isUploadVisible, setIsUploadVisible] = useState(false)
+  const [activeView, setActiveView] = useState<'table' | 'map'>('table')
 
   // Contacts state (infinite scroll)
   const [contacts, setContacts] = useState<Contact[]>([])
@@ -331,45 +335,90 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-8 space-y-8 max-w-7xl">
-        {/* Upload Section */}
-        <UploadSection
-          imagePreviews={imagePreviews}
-          isExtracting={isExtracting}
-          extractionProgress={extractionProgress}
-          onImagesSelect={handleImagesSelect}
-          onExtract={handleExtract}
-          onClear={handleClear}
-          totalContacts={total}
-        />
-
-        {/* Contacts Table */}
+        {/* Contacts Section */}
         <section>
-          <div className="flex items-center gap-2 mb-4">
-            <ContactIcon className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-lg font-semibold">Saved Contacts</h2>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <ContactIcon className="h-5 w-5 text-muted-foreground" />
+              <h2 className="text-lg font-semibold">Saved Contacts</h2>
+            </div>
+            <Tabs value={activeView} onValueChange={(v) => setActiveView(v as 'table' | 'map')}>
+              <TabsList>
+                <TabsTrigger value="table" className="gap-1.5">
+                  <LayoutList className="h-3.5 w-3.5" />
+                  Table
+                </TabsTrigger>
+                <TabsTrigger value="map" className="gap-1.5">
+                  <MapPinned className="h-3.5 w-3.5" />
+                  Map
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
-          <ContactsTable
-            contacts={contacts}
-            isLoading={isLoadingContacts}
-            isLoadingMore={isLoadingMore}
-            hasMore={hasMore}
-            selectedIds={selectedIds}
-            fetchingId={fetchingId}
-            fetchProgress={fetchProgress}
-            onSelectionChange={setSelectedIds}
-            onDeleteSelected={handleDeleteSelected}
-            onFetchAddress={handleFetchAddress}
-            isFetchingAddress={isFetchingAddress}
-            onRefresh={() => fetchContacts(debouncedSearch)}
-            onLoadMore={loadMore}
-            total={total}
-            searchQuery={searchQuery}
-            onSearchChange={handleSearchChange}
-            keywordSuffix={keywordSuffix}
-            onKeywordSuffixChange={setKeywordSuffix}
-            sentinelRef={sentinelRef}
-          />
+
+          {activeView === 'table' ? (
+            <ContactsTable
+              contacts={contacts}
+              isLoading={isLoadingContacts}
+              isLoadingMore={isLoadingMore}
+              hasMore={hasMore}
+              selectedIds={selectedIds}
+              fetchingId={fetchingId}
+              fetchProgress={fetchProgress}
+              onSelectionChange={setSelectedIds}
+              onDeleteSelected={handleDeleteSelected}
+              onFetchAddress={handleFetchAddress}
+              isFetchingAddress={isFetchingAddress}
+              onRefresh={() => fetchContacts(debouncedSearch)}
+              onLoadMore={loadMore}
+              total={total}
+              searchQuery={searchQuery}
+              onSearchChange={handleSearchChange}
+              keywordSuffix={keywordSuffix}
+              onKeywordSuffixChange={setKeywordSuffix}
+              sentinelRef={sentinelRef}
+            />
+          ) : (
+            <MapView />
+          )}
         </section>
+
+        {/* Upload Section — Toggleable */}
+        <div>
+          <button
+            onClick={() => setIsUploadVisible((prev) => !prev)}
+            className="flex items-center justify-between w-full rounded-lg border bg-card p-4 hover:bg-accent/50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-primary text-primary-foreground">
+                <ImagePlus className="h-4 w-4" />
+              </div>
+              <div className="flex flex-col items-start gap-0.5">
+                <h3 className="text-sm font-semibold">Upload Contact Table Images</h3>
+                <p className="text-xs text-muted-foreground">
+                  Extract names, phone numbers, and addresses from table images
+                </p>
+              </div>
+            </div>
+            <ChevronDown
+              className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${isUploadVisible ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          {isUploadVisible && (
+            <div className="mt-2">
+              <UploadSection
+                imagePreviews={imagePreviews}
+                isExtracting={isExtracting}
+                extractionProgress={extractionProgress}
+                onImagesSelect={handleImagesSelect}
+                onExtract={handleExtract}
+                onClear={handleClear}
+                totalContacts={total}
+              />
+            </div>
+          )}
+        </div>
       </main>
 
       {/* Footer */}

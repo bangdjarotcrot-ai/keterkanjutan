@@ -2965,3 +2965,255 @@ prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Cont
 prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
 prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
  GET /api/contacts?limit=50 200 in 7ms (compile: 1629µs, render: 5ms)
+ GET / 200 in 44ms (compile: 3ms, render: 42ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1696µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1263µs, render: 4ms)
+ GET / 200 in 31ms (compile: 1767µs, render: 29ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1437µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1435µs, render: 4ms)
+ GET / 200 in 35ms (compile: 2ms, render: 32ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1537µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 3ms, render: 5ms)
+✓ Compiled in 96ms
+✓ Compiled in 96ms
+ GET / 200 in 150ms (compile: 49ms, render: 101ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1797µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1343µs, render: 5ms)
+✓ Compiled in 130ms
+ GET / 200 in 202ms (compile: 60ms, render: 142ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1787µs, render: 6ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1701µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE (`main`.`Contact`.`name` LIKE ? OR `main`.`Contact`.`phone` LIKE ? OR `main`.`Contact`.`address` LIKE ? OR `main`.`Contact`.`kecamatan` LIKE ? OR `main`.`Contact`.`kelurahan` LIKE ? OR `main`.`Contact`.`kota` LIKE ? OR `main`.`Contact`.`provinsi` LIKE ?) ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE (`main`.`Contact`.`name` LIKE ? OR `main`.`Contact`.`phone` LIKE ? OR `main`.`Contact`.`address` LIKE ? OR `main`.`Contact`.`kecamatan` LIKE ? OR `main`.`Contact`.`kelurahan` LIKE ? OR `main`.`Contact`.`kota` LIKE ? OR `main`.`Contact`.`provinsi` LIKE ?) LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50&search=sinaga 200 in 8ms (compile: 1987µs, render: 6ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 11ms (compile: 3ms, render: 9ms)
+ GET / 200 in 36ms (compile: 1895µs, render: 34ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1772µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1088µs, render: 4ms)
+✓ Compiled in 98ms
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 10ms (compile: 4ms, render: 6ms)
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1338µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1754µs, render: 6ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1238µs, render: 5ms)
+✓ Compiled in 163ms
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 3ms, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1316µs, render: 4ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1215µs, render: 3ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1481µs, render: 4ms)
+✓ Compiled in 105ms
+ GET / 200 in 176ms (compile: 51ms, render: 125ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 11ms (compile: 4ms, render: 7ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1660µs, render: 5ms)
+✓ Compiled in 113ms
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 11ms (compile: 3ms, render: 8ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1769µs, render: 7ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 9ms (compile: 1874µs, render: 7ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1230µs, render: 7ms)
+ GET / 200 in 214ms (compile: 63ms, render: 150ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 13ms (compile: 2ms, render: 10ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1937µs, render: 6ms)
+ GET / 200 in 36ms (compile: 3ms, render: 33ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 2ms, render: 5ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1345µs, render: 4ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET / 200 in 30ms (compile: 1871µs, render: 28ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1684µs, render: 6ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1252µs, render: 4ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET / 200 in 36ms (compile: 1844µs, render: 34ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1815µs, render: 6ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1399µs, render: 6ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET / 200 in 38ms (compile: 1902µs, render: 36ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1434µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1101µs, render: 4ms)
+ GET / 200 in 34ms (compile: 1849µs, render: 32ms)
+ GET /api/contacts?limit=50 200 in 8ms (compile: 1902µs, render: 6ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1268µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+✓ Compiled in 648ms
+ GET / 200 in 97ms (compile: 63ms, render: 34ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 16ms (compile: 1448µs, render: 14ms)
+ GET / 200 in 12ms (compile: 2ms, render: 10ms)
+ GET / 200 in 15ms (compile: 2ms, render: 13ms)
+ GET / 200 in 11ms (compile: 1291µs, render: 10ms)
+ GET / 200 in 14ms (compile: 1398µs, render: 13ms)
+ GET / 200 in 12ms (compile: 1492µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1422µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1315µs, render: 10ms)
+ GET / 200 in 14ms (compile: 1470µs, render: 13ms)
+ GET / 200 in 11ms (compile: 1327µs, render: 9ms)
+ GET / 200 in 15ms (compile: 3ms, render: 13ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 21ms (compile: 2ms, render: 19ms)
+ GET / 200 in 11ms (compile: 1487µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1578µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1495µs, render: 9ms)
+ GET / 200 in 14ms (compile: 1876µs, render: 12ms)
+ GET / 200 in 10ms (compile: 1339µs, render: 9ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 10ms (compile: 1348µs, render: 9ms)
+ GET / 200 in 15ms (compile: 1442µs, render: 13ms)
+ GET / 200 in 15ms (compile: 1471µs, render: 14ms)
+ GET / 200 in 10ms (compile: 1401µs, render: 9ms)
+ GET / 200 in 14ms (compile: 1408µs, render: 12ms)
+ GET / 200 in 11ms (compile: 1428µs, render: 9ms)
+ GET / 200 in 16ms (compile: 1857µs, render: 15ms)
+ GET / 200 in 117ms (compile: 3ms, render: 114ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 48ms (compile: 36ms, render: 12ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 11ms (compile: 2ms, render: 9ms)
+✓ Compiled in 178ms
+✓ Compiled in 203ms
+✓ Compiled in 157ms
+✓ Compiled in 159ms
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 11ms (compile: 2ms, render: 8ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1421µs, render: 5ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 9ms (compile: 3ms, render: 7ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1165µs, render: 5ms)
+✓ Compiled in 142ms
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1487µs, render: 6ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 9ms (compile: 1179µs, render: 7ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1133µs, render: 5ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1578µs, render: 6ms)
+✓ Compiled in 391ms
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1856µs, render: 5ms)
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 6ms (compile: 1387µs, render: 4ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/contacts?limit=50 200 in 7ms (compile: 1821µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Contact`.`id` FROM `main`.`Contact` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Contact`.`id`, `main`.`Contact`.`name`, `main`.`Contact`.`phone`, `main`.`Contact`.`address`, `main`.`Contact`.`kecamatan`, `main`.`Contact`.`kelurahan`, `main`.`Contact`.`kota`, `main`.`Contact`.`provinsi`, `main`.`Contact`.`createdAt`, `main`.`Contact`.`updatedAt` FROM `main`.`Contact` WHERE 1=1 ORDER BY `main`.`Contact`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/contacts?limit=50 200 in 5ms (compile: 1244µs, render: 4ms)
+✓ Compiled in 228ms
