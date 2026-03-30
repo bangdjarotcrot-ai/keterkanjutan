@@ -429,8 +429,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-4 mt-auto">
         <div className="container mx-auto px-4 flex items-center justify-between text-xs text-muted-foreground">
-          <span>Alpha System Database &mdash; Powered by AI Vision</span>
-          <span>Address data from OpenStreetMap</span>
+          <span>Alpha System Database</span>
         </div>
       </footer>
     </div>
