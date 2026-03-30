@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search') || '';
     const limit = parseInt(searchParams.get('limit') || '50');
-    const cursor = searchParams.get('cursor') || null;
+    const offset = parseInt(searchParams.get('offset') || '0');
 
     const where = search
       ? {
@@ -22,38 +22,24 @@ export async function GET(request: NextRequest) {
         }
       : {};
 
-    // Cursor-based: fetch items created BEFORE the cursor
-    const cursorWhere = cursor
-      ? {
-          ...where,
-          createdAt: { lt: cursor },
-        }
-      : where;
-
     const [contacts, total] = await Promise.all([
       db.contact.findMany({
-        where: cursorWhere,
+        where,
         orderBy: { createdAt: 'desc' },
-        take: limit + 1, // fetch one extra to detect hasMore
+        skip: offset,
+        take: limit,
       }),
       db.contact.count({ where }),
     ]);
 
-    // If we got limit+1 items, there are more pages
-    const hasMore = contacts.length > limit;
-    const pageContacts = hasMore ? contacts.slice(0, limit) : contacts;
-
-    // The cursor for the next page is the createdAt of the last item
-    const nextCursor = hasMore && pageContacts.length > 0
-      ? pageContacts[pageContacts.length - 1].createdAt.toISOString()
-      : null;
+    const hasMore = offset + contacts.length < total;
 
     return NextResponse.json({
       success: true,
-      contacts: pageContacts,
+      contacts,
       total,
       hasMore,
-      nextCursor,
+      offset,
     });
   } catch (error) {
     console.error('Get contacts error:', error);

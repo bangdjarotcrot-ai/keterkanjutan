@@ -38,7 +38,6 @@ export default function Home() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [total, setTotal] = useState(0)
   const [hasMore, setHasMore] = useState(false)
-  const [nextCursor, setNextCursor] = useState<string | null>(null)
   const [isLoadingContacts, setIsLoadingContacts] = useState(false)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
 
@@ -76,7 +75,6 @@ export default function Home() {
         setContacts(data.contacts)
         setTotal(data.total)
         setHasMore(data.hasMore)
-        setNextCursor(data.nextCursor)
       }
     } catch (error) {
       console.error('Failed to fetch contacts:', error)
@@ -85,15 +83,15 @@ export default function Home() {
     }
   }, [debouncedSearch])
 
-  // Load more contacts (infinite scroll)
+  // Load more contacts
   const loadMore = useCallback(async () => {
-    if (isLoadingMore || !hasMore || !nextCursor) return
+    if (isLoadingMore || !hasMore) return
     setIsLoadingMore(true)
 
     try {
       const params = new URLSearchParams({
         limit: String(PAGE_SIZE),
-        cursor: nextCursor,
+        offset: String(contacts.length),
       })
       if (debouncedSearch.trim()) params.set('search', debouncedSearch.trim())
 
@@ -103,7 +101,6 @@ export default function Home() {
       if (data.success) {
         setContacts((prev) => [...prev, ...data.contacts])
         setHasMore(data.hasMore)
-        setNextCursor(data.nextCursor)
         setTotal(data.total)
       }
     } catch (error) {
@@ -111,7 +108,7 @@ export default function Home() {
     } finally {
       setIsLoadingMore(false)
     }
-  }, [isLoadingMore, hasMore, nextCursor, debouncedSearch])
+  }, [isLoadingMore, hasMore, contacts.length, debouncedSearch])
 
   // Initial load
   useEffect(() => {
