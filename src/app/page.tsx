@@ -22,6 +22,7 @@ import { useToast } from '@/hooks/use-toast'
 import { useDebounce } from '@/hooks/use-debounce'
 import type { Contact } from '@/components/molecules/export-button'
 import { useKeywordSuffix } from '@/components/molecules/keyword-settings'
+import { AuthModal } from '@/components/atoms/auth-modal'
 
 const PAGE_SIZE = 50
 
@@ -331,10 +332,12 @@ export default function Home() {
   }, [selectedIds, keywordSuffix, toast])
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center gap-3">
+    <>
+      <AuthModal />
+      <div className="min-h-screen flex flex-col bg-background">
+        {/* Header */}
+        <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+          <div className="container mx-auto px-4 py-4 flex items-center gap-3">
           <Image
             src="/logo.png"
             alt="Alpha System Database"
@@ -436,5 +439,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   )
 }
